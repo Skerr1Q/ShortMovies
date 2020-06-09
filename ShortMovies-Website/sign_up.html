@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <script type="text/javascript" src="script/signup.js"></script>
+    <title>Main Page | ShortMovies</title>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <link rel="stylesheet" href="sign.css" type="text/css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="image/logo.ico" />
+    <meta name="viewport" width="device-width , initial-scale=1.0"/>
+    <meta charset="UTF-8"/>
+
+</head>
+<body>
+    <nav>
+
+        <a class="left_nav" href="main.html" style="padding: 0px;"><img style="height: 62px;" src="image/header.png"/></a>
+        <input class="srch" type="text" onfocus="this.value=''" name="search" value="Search">
+        <a class="right_nav" href="signup.html">Join</a>            
+        <a class="right_nav" href="signin.html">Login</a>
+
+    </nav>
+    <div id="login_scr">
+
+            <h1>Sign up page</h1>
+            <form id ="login_form">
+                
+                    <label for="usrname"><p>Username:</p></label>
+                    <input type="text" name="username" id="usrname" placeholder="Enter Username" required><br/>                    
+                    <label for="email"><p>Email:</p></label>
+                    <input type="email" name="email" id="email" placeholder="Enter Email" required><br/>
+                    <label for="pssword"><p>Password:</p></label>
+                    <input type="password" name="pssword" id="pssword" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required><br/>                        
+                    <label for="pssword_a"><p>Confirm Password:</p></label>
+                    <input type="password" name="pssword_a" id="pssword_a" placeholder="Repeat Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required><br/>                          
+                    <input type="submit" class="subm_sign" value="Submit">
+
+            </form>
+
+        </div>
+
+</body>
+</html>

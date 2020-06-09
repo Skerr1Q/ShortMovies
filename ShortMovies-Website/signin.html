@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+
+        <script src="script/signin.js"></script>  
+        <title>Main Page | ShortMovies</title>
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+        <link rel="stylesheet" href="sign.css" type="text/css"/>
+        <link rel="shortcut icon" type="image/x-icon" href="image/logo.ico" />
+        <meta name="viewport" width="device-width , initial-scale=1.0"/>
+        <meta charset="UTF-8"/>
+
+    </head>
+    <body>
+        <nav id="nav_theme">
+
+            <a class="left_nav" href="main.html" style="padding: 0px;"><img style="height: 62px;" src="image/header.png"/></a>
+            <input class="srch" type="text" onfocus="this.value=''" name="search" value="Search">
+            <a class="right_nav" href="signup.html">Join</a>            
+            <a class="right_nav" href="signin.html">Login</a>
+
+        </nav>
+        <div id="login_scr">
+
+                <h1>Sign in page</h1>
+                <form method="POST" id ="login_form">
+                        <label for="usrname"><p>Login:</p></label>
+                        <input type="text" name="usrname" id="usrname" placeholder="Enter Username" required><br/>
+                        <label for="password"><p>Password:</p></label>
+                        <input type="password" name="pssword" id="pssword" placeholder="Enter Password" required><br/>
+                        <input type="submit" class="subm_sign" value="Submit">
+
+                </form>
+
+            </div>
+
+    </body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Page | ShortMovies</title>
+    <link rel="stylesheet" href={{url_for('static', filename="style/style.css")}} type="text/css"/>
+    <link rel="shortcut icon" type="image/x-icon" href={{url_for('static', filename='images/logo.png')}} />
+    <meta name="viewport" width="device-width , initial-scale=1.0"/>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href={{url_for('static', filename="style/sign.css")}} type="text/css"/>
+    <script href={{url_for('static', filename="scripts/script.js")}}/>
+    <script src = "https://unpkg.com/react@16/umd/react.development.js" crossorigin defer></script>
+    <script src = "https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin defer></script>
+    <script src = "https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+</head>
+<body>
+    <main>
+
+        <nav>
+
+            <a class="left_nav" href="{{ url_for('index') }}" style="padding: 0px;"><img style="height: 62px;" src={{url_for('static', filename='images/header.png')}}></a>
+            <a class="right_nav" href="{{ url_for('search') }}">Search</a>
+            <a class="right_nav" href="{{ url_for('add_movie') }}">Add new movie</a>
+            {% if current_user.is_anonymous %}
+            <a class="right_nav" href="{{ url_for('login') }}">Login</a>
+            <a class="right_nav" href="{{ url_for('sign_up') }}">Join</a>
+            {% else %}            
+            <a class="right_nav">{{current_user.nickname}}</a>
+            <a class="right_nav" href="{{ url_for('logout') }}">Logout</a>            
+            {% endif %}  
+
+
+        </nav>
+
+        <div id = "root"></div>
+
+        <script type = "text/babel">
+            class ShortMovie extends React.Component {
+                    constructor(props) {
+                    super(props);
+                    this.state = { user: null,
+                                    name: '',
+                                    link: '',
+                                    description: '',
+                                    poster: '',
+                                    isLoading: false };
+                    this.searchMovie = this.searchUser.bind(this);
+                    this.nameChange = this.nameChange.bind(this);
+                    }
+                    
+                    nameChange(e) { 
+                    this.setState({ nickname: e.target.value });
+                    }
+
+                    searchMovie() {
+                    this.setState({ isLoading: true });
+                    fetch('/api/user/' + this.state.nickname)
+                        .then(res => res.json())
+                        .then(res => {
+                        let user = null;
+                        if (res.message) alert(res.message);
+                        else user = res;
+                        this.setState({ user: user });
+                        })
+                        .catch(err => console.error(err))
+                        .finally(() => this.setState({ isLoading: false }));
+                    }
+
+                    renderMovie() 
+                    {
+                    return(
+                        <article id="search_block">
+                        <h1 id="result_search">Description: {this.state.movie.name}</h1>
+                        <button value="Show more info" onClick="showInfo"/>
+                        <p class="hidden_search">Name: {this.state.user.name}</p>
+                        <p class="hidden_search">Description: {this.state.movie.description}</p>
+                        <a href={this.state.movie.link} class="hidden_search">Youtube Link</a>
+                        <image class="hidden_search" src ={this.state.movie.last_seen}/>
+                        </article>
+                        );
+                    }
+
+                    render() {
+                    return (
+                        <div>
+                        <input type="text" value={this.state.name} onChange={this.nameChange} />
+                        <input type="button" value="Search" 
+                                onClick={this.searchMovie} 
+                                disabled={this.state.isLoading} />
+                        {this.state.movie ? this.renderMovie() : null}
+                        </div>
+                    );
+                    }
+                }
+
+        ReactDOM.render(<ShortMovie />, document.getElementById('root'));
+
+        </script>    
+
+    </main>
+
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Page | ShortMovies</title>
+    <link rel="stylesheet" href={{url_for('static', filename="style/style.css")}} type="text/css"/>
+    <link rel="shortcut icon" type="image/x-icon" href={{url_for('static', filename='images/logo.png')}} />
+    <meta name="viewport" width="device-width , initial-scale=1.0"/>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href={{url_for('static', filename="style/sign.css")}} type="text/css"/>
+
+</head>
+<body>
+    <main>
+        <nav>
+
+            <a class="left_nav" href="{{ url_for('index') }}" style="padding: 0px;"><img style="height: 62px;" src={{url_for('static', filename='images/header.png')}}></a>
+            <a class="right_nav" href="{{ url_for('search') }}">Search</a>
+            <a class="right_nav" href="{{ url_for('add_movie') }}">Add new movie</a>
+            {% if current_user.is_anonymous %}
+            <a class="right_nav" href="{{ url_for('login') }}">Login</a>
+            <a class="right_nav" href="{{ url_for('sign_up') }}">Join</a>
+            {% else %}            
+            <a class="right_nav" href="{{ url_for('logout') }}">Logout</a>            
+            {% endif %}  
+
+
+        </nav>
+
+
+    <div id="login_scr">
+<!--login forn-->
+        <h1>Sign in page</h1>
+            <form id ="login_form" class = "form_f" action="" method="post">
+                    {{ form.hidden_tag() }}
+                <p>
+                    {{ form.email.label(class="h1_inp") }}<br>
+                    {{ form.email(size=32, class="inp_field", placeholder="Enter email", onfocus="FocusInput();", onblur = "BlurInput();") }}
+                </p>
+                    {% for error in form.email.errors %}
+                    <p class="error_sign">[{{ error }}]</p>
+                    {%endfor%}
+                <p>
+                    {{ form.password.label(class="h1_inp") }}<br>
+                    {{ form.password(size=32, class="inp_field", placeholder="Enter Password", onfocus="FocusInput();", onblur = "BlurInput();") }}
+                </p>
+                    {% for error in form.password.errors %}
+                    <p class="error_sign">[{{ error }}]</p>
+                    {%endfor%}
+                    {{ form.remember_me() }} {{ form.remember_me.label }}
+                <p>{{ form.submit(class="subm_sign") }}</p>
+
+
+            </form class = "form_f">
+
+    </div>
+
+</main>
+
+
+</body>
+</html>

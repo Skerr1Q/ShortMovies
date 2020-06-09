@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Page | ShortMovies</title>
+    
+    <link rel="stylesheet" href={{url_for('static', filename="style/style.css")}} type="text/css"/>
+    <link rel="shortcut icon" type="image/x-icon" href={{url_for('static', filename='images/logo.png')}} />
+    <meta name="viewport" width="device-width , initial-scale=1.0"/>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href={{url_for('static', filename="style/sign.css")}} type="text/css"/>
+
+</head>
+<body>
+    <main>
+        <nav>
+
+            <a class="left_nav" href="{{ url_for('index') }}" style="padding: 0px;"><img style="height: 62px;" src={{url_for('static', filename='images/header.png')}}></a>
+            <a class="right_nav" href="{{ url_for('search') }}">Search</a>
+            <a class="right_nav" href="{{ url_for('add_movie') }}">Add new movie</a>
+            {% if current_user.is_anonymous %}
+            <a class="right_nav" href="{{ url_for('login') }}">Login</a>
+            <a class="right_nav" href="{{ url_for('sign_up') }}">Join</a>
+            {% else %}            
+            <a class="right_nav" href="{{ url_for('logout') }}">Logout</a>            
+            {% endif %}  
+
+
+        </nav>
+
+    <div id="login_scr">
+
+    <h1>Add movie page</h1>
+<!--add movie form-->
+        <form id ="login_form" class = "form_f" action="" method="post">
+
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name.label(class="h1_inp") }}<br>
+            {{ form.name(size=32, class="inp_field", placeholder="Enter name of movie") }}<br>
+            {% for error in form.name.errors %}
+                <p class="error_sign">[{{ error }}]</p>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.link.label(class="h1_inp") }}<br>
+            {{ form.link(class="inp_field", placeholder="Enter Youtube link to the movie", size=128) }}<br>
+            {% for error in form.link.errors %}
+                <p class="error_sign">[{{ error }}]</p>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.description.label(class="h1_inp") }}<br>
+            {{ form.description(class="inp_field", placeholder="Enter movie description", size=256) }}<br>
+            {% for error in form.description.errors %}
+                <p class="error_sign">[{{ error }}]</p>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.poster.label(class="h1_inp") }}<br>
+            {{ form.poster(class="inp_field", placeholder="Enter address to movie poster", size=128) }}<br>
+            {% for error in form.poster.errors %}
+                <p class="error_sign">[{{ error }}]</p>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit(class="subm_sign") }}</p>
+
+        </form>
+        </div>
+
+    </main>
+
+
+</body>
+</html>

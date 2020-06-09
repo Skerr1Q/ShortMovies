@@ -1,0 +1,42 @@
+#login_form{
+    padding:50px;
+    text-align: center;
+    font-size: 16px;
+}
+#login_scr  {
+    background: #ffffff;
+    width: 400px;
+    margin: auto;
+    border: 1px gray solid;
+    border-top: 0px; 
+}
+#form_f{
+    font-size: 18px;
+    font-family: Arial;
+}
+#form_f p, #h1_inp{
+    background: #feb236;;
+    color: #ffffff;
+    width: 300px;
+    margin: auto;
+    padding: 6px;
+}
+.inp_field{
+    padding: 6px;
+    margin: 14px;
+    width: 300px;
+}
+.subm_sign{
+    padding: 10px;
+    background: #6b5b95;
+    color: #ffffff;
+    font-family: 'Times New Roman', Times, serif;
+    outline: none;
+    box-shadow: none;
+    margin: 6px;
+    font-size: 20px;
+}
+.subm_sign:active {
+    background-color: #5b4e7e;
+}
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Page | ShortMovies</title>
+    <link rel="stylesheet" href={{url_for('static', filename="style/style.css")}} type="text/css"/>
+    <link rel="shortcut icon" type="image/x-icon" href={{url_for('static', filename='images/logo.png')}} />
+    <meta name="viewport" width="device-width , initial-scale=1.0"/>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href={{url_for('static', filename="style/main.css")}} type="text/css"/>
+<!--JS script-->
+    <script>
+        var count = 1;
+        function setColor() {
+            var property = document.getElementById("theme");
+            if (count == 0) {
+                property.style.backgroundColor = "orange"
+                count = 1;        
+            }
+            else {
+                property.style.backgroundColor = "black"
+                count = 0;
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <main>
+        <nav >
+<!--Navigation-->
+            <a class="left_nav" href="{{ url_for('index') }}" style="padding: 0px;"><img style="height: 62px;" src={{url_for('static', filename='images/header.png')}}></a>
+            <a class="right_nav" href="{{ url_for('search') }}">Search</a>
+            <a class="right_nav" href="{{ url_for('add_movie') }}">Add new movie</a>
+            {% if current_user.is_anonymous %}
+            <a class="right_nav" href="{{ url_for('login') }}">Login</a>
+            <a class="right_nav" href="{{ url_for('sign_up') }}">Join</a>
+            {% else %}            
+            <a class="right_nav" href="{{ url_for('logout') }}">Logout</a>            
+            {% endif %}  
+
+
+        </nav >
+
+        
+        <section>
+<!--movies collection-->
+            <h1>Collection of short movies</h1>
+            <div class="poster_container">
+
+                {% for movie in movies %}
+                <div class="poster">
+                        <img src="{{movie.poster}}"/>
+                        <div class = "mask">
+                            <a href='movie/{{movie.name}}'><h2>{{movie.name}}</h2></a>
+                            <p>{{movie.description}}</p>
+                        </div>
+                </div>
+                {% endfor %}
+
+            </section>
+<!--previous and next page-->
+            {% if prev_url %}
+            <a class="pagin" href="{{ prev_url }}">Previous page</a>
+            {% endif %}
+            {% if next_url %}
+            <a class="pagin" href="{{ next_url }}">Next page</a class="pagin">
+            {% endif %}
+
+            <footer>
+
+            Made by student of KM-84 <br/>
+            vladkost1121@gmail.com <br/>
+            +380957471250
+
+            </footer>
+
+    </main>
+
+    <button id="theme" onclick="setColor();"/>
+
+
+</body>
+</html>

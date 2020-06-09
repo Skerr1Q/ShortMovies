@@ -1,0 +1,5 @@
+search
+add new movie
+ratings
+review
+random movie

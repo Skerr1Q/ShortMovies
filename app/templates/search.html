@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Page | ShortMovies</title>
+    <link rel="stylesheet" href={{url_for('static', filename="style/style.css")}} type="text/css"/>
+    <link rel="shortcut icon" type="image/x-icon" href={{url_for('static', filename='images/logo.png')}} />
+    <meta name="viewport" width="device-width , initial-scale=1.0"/>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href={{url_for('static', filename="style/sign.css")}} type="text/css"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!--ajax flask and jquery-->
+    <script>
+    $(function() {
+        $('#srch').click(function() {
+            $('#info').css('display', "none");
+            $('#description').css('display', "none");
+        
+                $.ajax({
+                    url : '/api/movie/' + document.getElementById('search_mov').value,
+                    success: function(data) {
+                        $('#name').html(data['name']);
+                        $('#descr').html(data['link']);
+                        $('#link').html(data['description']);
+                    }
+                });
+            });
+    })</script>
+
+</head>
+<body>
+    <main>
+        <nav>
+
+            <a class="left_nav" href="{{ url_for('index') }}" style="padding: 0px;"><img style="height: 62px;" src={{url_for('static', filename='images/header.png')}}></a>
+            <a class="right_nav" href="{{ url_for('search') }}">Search</a>
+            <a class="right_nav" href="{{ url_for('add_movie') }}">Add new movie</a>
+            {% if current_user.is_anonymous %}
+            <a class="right_nav" href="{{ url_for('login') }}">Login</a>
+            <a class="right_nav" href="{{ url_for('sign_up') }}">Join</a>
+            {% else %}            
+            <a class="right_nav" href="{{ url_for('logout') }}">Logout</a>            
+            {% endif %}  
+
+        </nav>
+<!--search movie block-->
+                <input class="inp_field" type="text" id="search_mov" placeholder="Search movie in our database">
+                <button class="subm_sign" id="srch">Search</button>
+                <div id="wrapper_search">
+                <div id="results">
+                    <div id="name"></div> 
+                    <div id="descr"></div>
+                    <div id="link"></div>
+
+                </div>
+            </div>
+                
+                <pre id="info"></pre>
+                <div id="description"></div>
+                
+                </body>
+                </html>
+
+    </main>
+
+
+</body>
+</html>
+

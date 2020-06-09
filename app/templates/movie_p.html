@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head> 
+
+    <title>Main Page | ShortMovies</title>
+    <link rel="stylesheet" href={{url_for('static', filename="style/style.css")}} type="text/css"/>
+    <link rel="shortcut icon" type="image/x-icon" href={{url_for('static', filename='images/logo.png')}} />
+    <meta name="viewport" width="device-width , initial-scale=1.0"/>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href={{url_for('static', filename="style/movie_p.css")}} type="text/css"/>
+
+</head>
+<body>
+    <main>
+        <nav>
+
+            <a class="left_nav" href="{{ url_for('index') }}" style="padding: 0px;"><img style="height: 62px;" src={{url_for('static', filename='images/header.png')}}></a>
+            <a class="right_nav" href="{{ url_for('search') }}">Search</a>
+            <a class="right_nav" href="{{ url_for('add_movie') }}">Add new movie</a>
+            {% if current_user.is_anonymous %}
+            <a class="right_nav" href="{{ url_for('login') }}">Login</a>
+            <a class="right_nav" href="{{ url_for('sign_up') }}">Join</a>
+            {% else %}            
+            <a class="right_nav" href="{{ url_for('logout') }}">Logout</a>            
+            {% endif %}  
+
+
+        </nav>
+
+    <main>
+<!--render movie template-->
+        <h1>{{movie.name}}</h1>
+
+        <div class="mov">
+            <iframe src={{movie.link}} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div class="descr">
+
+            <p class="annot">
+                {{movie.description}}
+            </p>
+
+        </div>
+
+        
+    </main>
+    <footer>
+            Made by student of KM-84 <br/>
+            vladkost1121@gmail.com <br/>
+            +380957471250
+    </footer>
+</body>
+</html>
